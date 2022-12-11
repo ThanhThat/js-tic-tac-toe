@@ -4,17 +4,21 @@
 // 3. Replay Game
 // 4. Game status
 export function getCellElementList() {
-    return document.querySelectorAll("#cellList > li");
+  return document.querySelectorAll("#cellList > li");
 }
 
 export function getCurrentTurnElement() {
-    return document.getElementById("currentTurn");
+  return document.getElementById("currentTurn");
 }
 
 export function getCellElementAtIdx(index) {
-    return document.querySelector(`#cellList > li:ntn-child(${index + 1})`);
+  return document.querySelector(`#cellList > li:nth-child(${index + 1})`);
 }
 
 export function getGameStatusElement() {
-    return document.getElementById("gameStatus");
+  return document.getElementById("gameStatus");
+}
+
+export function getReplayButton() {
+  return document.getElementById("replayGame");
 }
