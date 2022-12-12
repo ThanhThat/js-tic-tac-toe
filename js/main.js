@@ -43,6 +43,13 @@ function showReplayButton() {
   replayButton.classList.add("show");
 }
 
+function hideReplayButton() {
+  const replayButton = getReplayButton();
+  if (!replayButton) return;
+
+  replayButton.classList.remove("show");
+}
+
 function highLightWinCells(winPositions) {
   if (!Array.isArray(winPositions) || winPositions.length !== 3) {
     throw new Error("Invalid win position");
@@ -109,6 +116,39 @@ function initCellElementList() {
   });
 }
 
+function resetGame() {
+  // reset temp global vars
+  currentTurn = TURN.CROSS;
+  gameStatus = GAME_STATUS.PLAYING;
+  cellValues = cellValues.map(() => "");
+
+  // reset dom elements
+  // reset game status
+  updateGameStatus(GAME_STATUS.PLAYING);
+
+  // reset current turn
+  const currentElement = getCurrentTurnElement();
+  if (currentElement) {
+    currentElement.classList.remove(TURN.CIRCLE, TURN.CROSS);
+    currentElement.classList.add(TURN.CROSS);
+  }
+  // reset game board
+  const cellElementList = getCellElementList();
+  for (const cell of cellElementList) {
+    cell.className = "";
+  }
+  // hide replay button
+  hideReplayButton();
+}
+
+function initReplayButton() {
+  const replayButton = getReplayButton();
+
+  if (replayButton) {
+    replayButton.addEventListener("click", resetGame);
+  }
+}
+
 /**
  * TODOs
  *
@@ -130,6 +170,6 @@ function initCellElementList() {
   initCellElementList();
 
   // Bind click event for replay button
-
+  initReplayButton();
   // ...
 })();

@@ -35,7 +35,6 @@ import { CELL_VALUE, GAME_STATUS } from "./constants.js";
 //    status: 'X',
 //    winPositions: [0, 4, 8],
 // }
-//
 
 // Input: an array of 9 items
 // Output: an object as mentioned above
