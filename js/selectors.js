@@ -7,6 +7,10 @@ export function getCellElementList() {
   return document.querySelectorAll("#cellList > li");
 }
 
+export function getCellListElement() {
+  return document.getElementById("cellList");
+}
+
 export function getCurrentTurnElement() {
   return document.getElementById("currentTurn");
 }

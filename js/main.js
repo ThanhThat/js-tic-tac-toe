@@ -4,6 +4,7 @@ import {
   getCurrentTurnElement,
   getGameStatusElement,
   getReplayButton,
+  getCellListElement,
 } from "./selectors.js";
 import { CELL_VALUE, GAME_STATUS, TURN } from "./constants.js";
 import { checkGameStatus } from "./utils.js";
@@ -63,6 +64,7 @@ function highLightWinCells(winPositions) {
 }
 
 function handleCellClick(cell, index) {
+  console.log("hi");
   const isClicked =
     cell.classList.contains(TURN.CIRCLE) || cell.classList.contains(TURN.CROSS);
 
@@ -109,11 +111,23 @@ function handleCellClick(cell, index) {
 }
 
 function initCellElementList() {
-  const cellElementList = getCellElementList();
-
-  cellElementList.forEach((cell, index) => {
-    cell.addEventListener("click", () => handleCellClick(cell, index));
+  // set index for each li element
+  const liList = getCellElementList();
+  liList.forEach((cell, index) => {
+    cell.dataset.idx = index;
   });
+
+  // Attach event when click ulElement
+  const ulElement = getCellListElement();
+  if (ulElement) {
+    ulElement.addEventListener("click", (e) => {
+      if (e.target.tagName !== "LI") return;
+
+      const index = Number.parseInt(e.target.dataset.idx);
+
+      handleCellClick(e.target, index);
+    });
+  }
 }
 
 function resetGame() {
